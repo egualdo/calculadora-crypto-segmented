@@ -1,7 +1,7 @@
 version: "3.8"
 services:
   frontend:
-    image: crypto-calculator-frontend:latest
+    image: egualdo/crypto-calculator-frontend:latest
     container_name: crypto-frontend
     build:
       context: .

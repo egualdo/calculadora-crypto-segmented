@@ -16,7 +16,7 @@ services:
       - crypto-net
 
   backend:
-    image: crypto-calculator-backend:latest
+    image: egualdo/crypto-calculator-backend:latest
     container_name: crypto-backend
     build:
       context: .
@@ -32,7 +32,9 @@ services:
     ports:
       - "3001:3001"
     networks:
-      - crypto-net
+      crypto-net:
+        aliases:
+          - crypto-calculator-backend-svc
 
 volumes:
   db_data:
