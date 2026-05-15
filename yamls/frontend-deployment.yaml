@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: crypto-calculator-frontend
+  namespace: crypto-calculator
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      role: crypto-calculator-frontend
+  template:
+    metadata:
+      labels:
+        role: crypto-calculator-frontend
+    spec: 
+      containers:
+      - name: crypto-calculator-frontend
+        image: egualdo/crypto-calculator-frontend:latest
+        ports:
+        - containerPort: 80
+        # env:
+        # - name: REACT_APP_CHAT_HOST
+        #   value: 34.71.96.230
+        # - name: REACT_APP_ADMISSION_HOST
+        #   value: 104.154.115.224
+        # - name: REACT_APP_ADMIN_HOST
+        #   value: 34.123.11.53

@@ -1,0 +1,42 @@
+version: "3.8"
+services:
+  db:
+    image: postgres:15-alpine
+    container_name: crypto-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: crypto_calculator
+      POSTGRES_USER: crypto_user
+      POSTGRES_PASSWORD: crypto_pass
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    networks:
+      - crypto-net
+
+  backend:
+    image: crypto-calculator-backend:latest
+    container_name: crypto-backend
+    build:
+      context: .
+      dockerfile: dockerfile
+    depends_on:
+      - db
+    environment:
+      DB_HOST: db
+      DB_PORT: "5432"
+      DB_NAME: crypto_calculator
+      DB_USER: crypto_user
+      DB_PASSWORD: crypto_pass
+    ports:
+      - "3001:3001"
+    networks:
+      - crypto-net
+
+volumes:
+  db_data:
+
+networks:
+  crypto-net:
+    external: true
