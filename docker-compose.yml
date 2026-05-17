@@ -14,10 +14,9 @@ services:
     volumes:
       - postgres_data:/var/lib/postgresql/data
 
-  # Backend service (opcional, en caso de que quieras correr todo en Docker)
   backend:
     build:
-      context: .
+      context: ./backend
       dockerfile: Dockerfile
     container_name: crypto_backend
     restart: always
@@ -31,6 +30,17 @@ services:
       - DB_PASSWORD=crypto_pass
     ports:
       - "3001:3001"
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: crypto_frontend
+    restart: always
+    depends_on:
+      - backend
+    ports:
+      - "8080:80"
 
 volumes:
   postgres_data:

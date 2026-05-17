@@ -34,7 +34,6 @@ export class ExchangeRateRepository {
         });
 
         const grouped = rows.reduce<Record<string, ExchangeRateEntity[]>>((acc, item) => {
-            const date = item.createdAt.toISOString().split('T')[0];
             if (!acc[item.type]) {
                 acc[item.type] = [];
             }
@@ -51,18 +50,8 @@ export class ExchangeRateRepository {
             return dayRows.length ? Number((dayRows.reduce((sum, item) => sum + item.averagePrice, 0) / dayRows.length).toFixed(2)) : null;
         });
 
-        const euroData = allDates.map((date) => {
-            const dayRows = grouped['euro']?.filter((item) => item.createdAt.toISOString().startsWith(date)) || [];
-            return dayRows.length ? Number((dayRows.reduce((sum, item) => sum + item.averagePrice, 0) / dayRows.length).toFixed(2)) : null;
-        });
-
         const p2pSellData = allDates.map((date) => {
             const dayRows = grouped['p2p_sell']?.filter((item) => item.createdAt.toISOString().startsWith(date)) || [];
-            return dayRows.length ? Number((dayRows.reduce((sum, item) => sum + item.averagePrice, 0) / dayRows.length).toFixed(2)) : null;
-        });
-
-        const p2pBuyData = allDates.map((date) => {
-            const dayRows = grouped['p2p_buy']?.filter((item) => item.createdAt.toISOString().startsWith(date)) || [];
             return dayRows.length ? Number((dayRows.reduce((sum, item) => sum + item.averagePrice, 0) / dayRows.length).toFixed(2)) : null;
         });
 
