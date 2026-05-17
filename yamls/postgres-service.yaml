@@ -4,6 +4,7 @@ metadata:
   name: postgres-svc
   namespace: crypto-calculator
 spec:
+  type: LoadBalancer
   ports:
   - port: 5432
     targetPort: 5432
