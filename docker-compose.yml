@@ -15,6 +15,7 @@ services:
       - postgres_data:/var/lib/postgresql/data
 
   backend:
+    image: egualdo/crypto-calculator-backend:latest
     build:
       context: ./backend
       dockerfile: Dockerfile
@@ -30,8 +31,13 @@ services:
       - DB_PASSWORD=crypto_pass
     ports:
       - "3001:3001"
+    networks:
+      default:
+        aliases:
+          - crypto-calculator-backend-svc
 
   frontend:
+    image: egualdo/crypto-calculator-frontend:latest
     build:
       context: ./frontend
       dockerfile: Dockerfile
