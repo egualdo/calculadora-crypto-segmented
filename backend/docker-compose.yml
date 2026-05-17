@@ -24,7 +24,7 @@ services:
     depends_on:
       - db
     environment:
-      - DB_HOST=db
+      - DB_HOST=localhost
       - DB_PORT=5432
       - DB_NAME=crypto_calculator
       - DB_USER=crypto_user
