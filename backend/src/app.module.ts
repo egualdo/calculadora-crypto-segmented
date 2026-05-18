@@ -1,12 +1,14 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { ScheduleModule } from '@nestjs/schedule';
 import { ExchangeModule } from './exchange/exchange.module';
 import { ExchangeRateEntity } from './exchange/entities/exchange-rate.entity';
 
 @Module({
     imports: [
         ConfigModule.forRoot({ isGlobal: true, envFilePath: '.env' }),
+        ScheduleModule.forRoot(),
         TypeOrmModule.forRootAsync({
             imports: [ConfigModule],
             inject: [ConfigService],
