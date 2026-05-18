@@ -14,6 +14,16 @@ services:
     volumes:
       - postgres_data:/var/lib/postgresql/data
 
+  scraper:
+    image: egualdo/crypto-calculator-scraper:latest
+    build:
+      context: ./scraper
+      dockerfile: Dockerfile
+    container_name: crypto_scraper
+    restart: always
+    ports:
+      - "8000:8000"
+
   backend:
     image: egualdo/crypto-calculator-backend:latest
     build:
@@ -23,12 +33,14 @@ services:
     restart: always
     depends_on:
       - db
+      - scraper
     environment:
       - DB_HOST=db
       - DB_PORT=5432
       - DB_NAME=crypto_calculator
       - DB_USER=crypto_user
       - DB_PASSWORD=crypto_pass
+      - SCRAPER_SERVICE_URL=http://scraper:8000
     ports:
       - "3001:3001"
     networks:

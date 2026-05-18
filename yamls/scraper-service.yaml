@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: crypto-calculator-scraper-svc
+  namespace: crypto-calculator
+  labels:
+    app: crypto-calculator-scraper
+spec:
+  type: LoadBalancer
+  ports:
+  - port: 8000
+    targetPort: 8000
+  selector:
+    app: crypto-calculator-scraper

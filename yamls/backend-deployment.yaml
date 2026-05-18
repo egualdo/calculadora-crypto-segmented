@@ -29,3 +29,5 @@ spec:
           value: "crypto_user"
         - name: DB_PASSWORD
           value: "crypto_pass"
+        - name: SCRAPER_SERVICE_URL
+          value: "http://crypto-calculator-scraper-svc:8000"

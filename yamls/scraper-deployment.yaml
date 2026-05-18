@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: crypto-calculator-scraper
+  namespace: crypto-calculator
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: crypto-calculator-scraper
+  template:
+    metadata:
+      labels:
+        app: crypto-calculator-scraper
+    spec:
+      containers:
+      - name: crypto-calculator-scraper
+        image: egualdo/crypto-calculator-scraper:latest
+        ports:
+        - containerPort: 8000
