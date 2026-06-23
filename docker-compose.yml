@@ -1,4 +1,4 @@
-version: '3.8'
+version: "3.8"
 
 services:
   db:
@@ -22,7 +22,7 @@ services:
     container_name: crypto_scraper
     restart: always
     ports:
-      - "8000:8000"
+      - "7000:7000"
 
   backend:
     image: egualdo/crypto-calculator-backend:latest
@@ -40,7 +40,7 @@ services:
       - DB_NAME=crypto_calculator
       - DB_USER=crypto_user
       - DB_PASSWORD=crypto_pass
-      - SCRAPER_SERVICE_URL=http://scraper:8000
+      - SCRAPER_SERVICE_URL=http://scraper:7000
     ports:
       - "3001:3001"
     networks:
